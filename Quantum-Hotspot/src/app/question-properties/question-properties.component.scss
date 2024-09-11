@@ -1,0 +1,22 @@
+.propbox{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 24px;
+    padding-right: 24px;
+    background: white;
+    height: 64px;
+    margin-left: 24px;
+    margin-right: 24px;
+
+
+    .box{
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .line{
+        width: 75%;
+    }
+}

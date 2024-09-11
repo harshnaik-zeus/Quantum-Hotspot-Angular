@@ -1,0 +1,52 @@
+.Hotspot{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px 26px 24px 26px;
+
+
+    .hotques{
+        display: flex;
+        align-items: center;
+        gap: 9px;
+
+        .hottext{
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .hotbracket{
+            font-size: 12px;
+            display: flex;
+            align-items: flex-start;
+        }
+    }
+
+
+    .lockbuttons{
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .makebox{
+        background-color: #E2F8FE;
+        border: 1px solid black;
+        border-radius: 2px;
+        height: 28px;
+        display: flex;
+        font-size: 14px;
+        font-weight: 500;
+        justify-content: center; 
+        align-items: center;     
+        text-align: center; 
+    }
+
+    .unlock{
+        width: 109px;
+    }
+
+    .saveandprev{
+        width: 193px;
+    }
+}
