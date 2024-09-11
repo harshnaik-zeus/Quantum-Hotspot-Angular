@@ -1,0 +1,32 @@
+.newquestions{
+    margin-top: 5px;
+    height: 52px;
+    background-color: #3C4E62;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+
+    .optbuttons{
+        display: flex;
+        align-items: center;
+        gap: 80px;
+    }
+
+    .opt{
+        height: 28px;
+        width: 92px;
+        background-color: #3FD28B;
+        text-align: center;
+        border-radius: 2px;
+    }
+
+    .midheader{
+        width: 160px;
+        height: 20px;
+        color: white;
+        font-size: 16px;
+        height: 20px;
+    }
+}
