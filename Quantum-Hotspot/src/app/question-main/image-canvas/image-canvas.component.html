@@ -1,0 +1,26 @@
+<div class="textontop">
+    <span class="imageadding">
+      <p class="txt1">Image Preview</p>
+      <span class="forgap" (click)="onImageAddClick()">
+        <img class="imgadd" src="../../../assets/icons8-plus-25.png" alt="Add Icon">
+        <p class="txt2">Add Image</p>
+      </span>
+    </span>
+  </div>
+  
+  <!-- Hidden file input to upload an image -->
+  <input #fileInput type="file" style="display: none;" (change)="onFileChange($event)" accept="image/*" />
+  
+  <div class="maincanvas">
+    <div class="maincanvastext">
+      <div class="addhot txtedit">ADD HOTSPOT</div>
+      <div class="rotate">
+        <div class="lpeek txtedit">L</div>
+        <div class="rpeek txtedit">R</div>
+      </div>
+    </div>
+    <div class="maincancanvas">
+      <canvas #canvas class="imgcanvas" id="canvas" width="1000" height="550"></canvas>
+    </div>
+  </div>
+  

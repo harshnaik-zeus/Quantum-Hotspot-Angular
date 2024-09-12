@@ -1,0 +1,79 @@
+.textontop{
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-top: 40px;
+
+    .imageadding{
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        .txt1{
+            font-size: 12px;
+        }
+
+        .forgap{
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            .txt2{
+                color:#1F7A54;
+                font-size: 12px;
+            }
+
+        }
+    }
+}
+
+.maincanvas{
+    margin-left: 24px;
+    margin-right: 24px;
+    margin-top: 12px;
+    width: 1000px;
+    height: 600px;
+    border: 1px solid black;
+
+
+    .maincanvastext{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        // background-color: #E2F8FE;
+        padding: 8px;
+        border-bottom: 1px solid black;
+
+        .addhot{
+            width: 157px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .lpeek{
+            width: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .rpeek{
+            width: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .txtedit{
+            background-color: #E2F8FE;
+            border: 1px solid black;
+        }
+
+        .rotate{
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+    }
+}

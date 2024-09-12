@@ -13,7 +13,11 @@
     .box{
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 12px; 
+    }
+
+    .proptext{
+        font-size: 16px;
     }
 
     .line{
