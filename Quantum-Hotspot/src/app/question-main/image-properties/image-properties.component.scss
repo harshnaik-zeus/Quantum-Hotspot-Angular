@@ -1,0 +1,159 @@
+.mainbig {
+    height: 600px;
+    width: 750px;
+    padding-top: 23px;
+  
+    .slide {
+        width: 100%;
+        padding-bottom: 12px;
+
+      .slide-label {
+        font-size: 12px;
+      }
+  
+      .slide-input {
+        // Styles for the input container inside the slide
+  
+        .slider {
+            height: 2px;
+            width: 100%;
+            background: #1F7A54;
+
+        }
+      }
+    }
+  
+    .mainblue {
+        background-color: #F3FBFF;
+        height: 600px;
+  
+      .settings {
+        padding: 24px;
+  
+        .settings-label {
+          font-size: 14px;
+          padding-bottom: 12px;
+        }
+  
+        .settings-select {
+            padding-bottom: 4px;
+
+            .selectopt{
+                width: 100%;
+                border: none;
+                outline: none;
+                background: transparent;
+                border-bottom: 1px solid #ccc;
+            }
+        }
+      }
+  
+      .count {
+        padding-left: 24px;
+        padding-right: 24px;
+        // padding-bottom: 24px;
+
+  
+        .count-label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 12px;
+  
+          div {
+           font-size: 14px;
+          }
+  
+          .clear-all {
+           color: #1F7A54;
+           font-size: 14px;
+          }
+        }
+  
+        .count-input {
+          // Styles for the input field inside the count section
+  
+          div {
+            height: 200px;
+            width: 100%;
+            background: transparent;
+            border: 1px solid #ccc;
+            outline: none;
+            text-align: end; 
+            padding: 180px 10px 10px 0;
+            box-sizing: border-box; 
+          }
+          
+          
+        }
+      }
+    }
+  }
+  .colours{
+    // padding: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 24px;
+  }
+  .color-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  
+    .section-title {
+      font-size: 12px;
+      font-weight: bold;
+      color: #6f6f6f;
+    }
+  
+    .color-picker-row {
+      display: flex;
+      gap: 30%;
+  
+      .color-picker {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+  
+        .label {
+          font-size: 12px;
+          color: #6f6f6f;
+        }
+  
+        .color-input-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+  
+          .color-box {
+            width: 36px;
+            height: 36px;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            border: 1px solid #ccc; // Border for color box
+          }
+  
+          .hex-input {
+            width: 80px;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            text-align: center;
+            font-size: 14px;
+            padding: 5px 0;
+            color: #1F7A54; 
+            background: transparent;
+            outline: none;
+          }
+  
+          .icon {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            color: #1F7A54; // Color of the icon matching the selected color
+          }
+        }
+      }
+    }
+  }
+  

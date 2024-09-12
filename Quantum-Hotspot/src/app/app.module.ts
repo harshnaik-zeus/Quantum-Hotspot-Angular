@@ -9,6 +9,7 @@ import { QuestionInfoComponent } from './question-info/question-info.component';
 import { QuestionPropertiesComponent } from './question-properties/question-properties.component';
 import { QuestionMainComponent } from './question-main/question-main.component';
 import { ImageCanvasComponent } from './question-main/image-canvas/image-canvas.component';
+import { ImagePropertiesComponent } from './question-main/image-properties/image-properties.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ImageCanvasComponent } from './question-main/image-canvas/image-canvas.
     QuestionInfoComponent,
     QuestionPropertiesComponent,
     QuestionMainComponent,
-    ImageCanvasComponent
+    ImageCanvasComponent,
+    ImagePropertiesComponent
   ],
   imports: [
     BrowserModule,

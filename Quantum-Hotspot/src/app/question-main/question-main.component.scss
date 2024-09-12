@@ -32,3 +32,14 @@
     }
   }
 }
+.inline{
+  display: grid;
+  grid-template-areas: "a b";
+
+  .first{
+    grid-area: a;
+  }
+  .second{
+    grid-area: b;
+  }
+}

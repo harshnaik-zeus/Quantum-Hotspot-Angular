@@ -31,6 +31,14 @@ export class ImageCanvasComponent implements OnInit, AfterViewInit {
     }
   }
 
+  onCanvasmousedown(): void {
+    console.log("Hello");
+  }
+
+  onCanvasmouseup():void {
+    console.log("bye");
+  }
+
   onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
