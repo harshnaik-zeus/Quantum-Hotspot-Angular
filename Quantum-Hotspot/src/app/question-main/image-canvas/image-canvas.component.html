@@ -13,14 +13,17 @@
   
   <div class="maincanvas">
     <div class="maincanvastext">
-      <div class="addhot txtedit">ADD HOTSPOT</div>
+      <div class="addhot txtedit" (click)="saveSelections()">ADD HOTSPOT</div>
       <div class="rotate">
         <div class="lpeek txtedit">L</div>
         <div class="rpeek txtedit">R</div>
       </div>
     </div>
     <div class="maincancanvas">
-      <canvas #canvas class="imgcanvas" id="canvas" width="1000" height="550" (mousedown)="onCanvasmousedown()" (mouseup)="onCanvasmouseup()"></canvas>
+      <canvas #canvas class="imgcanvas" id="canvas" width="1000" height="550" 
+      (mousedown)="onCanvasMouseDown($event)" 
+      (mousemove)="onCanvasMouseMove($event)" 
+      (mouseup)="onCanvasMouseUp()"></canvas>
     </div>
   </div>
   

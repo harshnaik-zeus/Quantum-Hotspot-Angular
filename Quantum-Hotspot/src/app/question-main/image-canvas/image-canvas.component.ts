@@ -1,5 +1,14 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 
+interface Selection {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+  fillStyle: string;
+  strokeStyle: string;
+}
+
 @Component({
   selector: 'app-image-canvas',
   templateUrl: './image-canvas.component.html',
@@ -11,12 +20,19 @@ export class ImageCanvasComponent implements OnInit, AfterViewInit {
   @ViewChild('canvas', { static: false }) canvas!: ElementRef<HTMLCanvasElement>;
   ctx!: CanvasRenderingContext2D | null;
 
-  ngOnInit(): void {
-    
-  }
+  isDrawing = false;
+  startX = 0;
+  startY = 0;
+  currentX = 0;
+  currentY = 0;
+  selections: Selection[] = [];
+  tempSelection: Selection | null = null;
+
+  image: HTMLImageElement | null = null; // To store the loaded image
+
+  ngOnInit(): void {}
 
   ngAfterViewInit(): void {
-    // Ensure that canvas context is retrieved after view initialization
     if (this.canvas) {
       this.ctx = this.canvas.nativeElement.getContext('2d');
       if (!this.ctx) {
@@ -31,29 +47,117 @@ export class ImageCanvasComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onCanvasmousedown(): void {
-    console.log("Hello");
+  onCanvasMouseDown(event: MouseEvent): void {
+    this.isDrawing = true;
+    const rect = this.canvas.nativeElement.getBoundingClientRect();
+    this.startX = event.clientX - rect.left;
+    this.startY = event.clientY - rect.top;
+
+    // Clear temporary selection
+    this.tempSelection = null;
   }
 
-  onCanvasmouseup():void {
-    console.log("bye");
+  onCanvasMouseMove(event: MouseEvent): void {
+    if (!this.isDrawing) return;
+
+    const rect = this.canvas.nativeElement.getBoundingClientRect();
+    this.currentX = event.clientX - rect.left;
+    this.currentY = event.clientY - rect.top;
+
+    // Create a temporary selection object
+    this.tempSelection = {
+      x: this.startX,
+      y: this.startY,
+      width: this.currentX - this.startX,
+      height: this.currentY - this.startY,
+      fillStyle: 'rgba(255, 255, 0, 0.3)', // Semi-transparent fill
+      strokeStyle: 'red'
+    };
+
+    // Redraw the image and selections
+    this.clearCanvas();
+    this.drawImage(); // Redraw the image first
+    this.drawSelections();
+    this.drawTempSelection();
   }
 
+  onCanvasMouseUp(): void {
+    if (!this.isDrawing) return;
+
+    this.isDrawing = false;
+
+    // Temporary selection is kept but not saved until 'saveSelections' is called
+  }
+
+  // Function to clear the canvas
+  clearCanvas(): void {
+    this.ctx?.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
+  }
+
+  // Function to draw all permanent selections
+  drawSelections(): void {
+    this.selections.forEach(selection => {
+      this.ctx!.fillStyle = selection.fillStyle;
+      this.ctx!.strokeStyle = selection.strokeStyle;
+      this.ctx!.lineWidth = 2;
+
+      // Draw the permanent selection on the canvas
+      this.ctx!.fillRect(selection.x, selection.y, selection.width, selection.height);
+      this.ctx!.strokeRect(selection.x, selection.y, selection.width, selection.height);
+    });
+  }
+
+  // Function to draw the temporary selection
+  drawTempSelection(): void {
+    if (this.tempSelection) {
+      this.ctx!.fillStyle = this.tempSelection.fillStyle;
+      this.ctx!.strokeStyle = this.tempSelection.strokeStyle;
+      this.ctx!.lineWidth = 2;
+
+      // Draw the temporary selection on the canvas
+      this.ctx!.fillRect(this.tempSelection.x, this.tempSelection.y, this.tempSelection.width, this.tempSelection.height);
+      this.ctx!.strokeRect(this.tempSelection.x, this.tempSelection.y, this.tempSelection.width, this.tempSelection.height);
+    }
+  }
+
+  // Function to save the current temporary selection to the permanent list
+  saveSelections(): void {
+    if (this.tempSelection) {
+      this.selections.push(this.tempSelection);
+      this.tempSelection = null; // Clear temporary selection after saving
+    }
+    this.clearCanvas();
+    this.drawImage(); // Redraw the image first
+    this.drawSelections(); // Redraw everything
+    console.log('Saved Selections:', this.selections);
+  }
+
+  // Function to draw the image on the canvas
+  drawImage(): void {
+    if (this.image) {
+      this.ctx?.drawImage(this.image, 0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
+    }
+  }
+
+  // Update: Clear selections when a new image is loaded, even if it's the same image
   onFileChange(event: Event): void {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
 
     if (file) {
+      // Always reset selections, even if the image is the same
+      this.selections = []; // Clear previous selections
+      this.tempSelection = null; // Clear temporary selections
+      this.clearCanvas(); // Clear the canvas
+
       const reader = new FileReader();
       reader.onload = (e: ProgressEvent<FileReader>) => {
-        const img = new Image();
-        img.onload = () => {
-          // Clear the canvas before drawing the new image
-          this.ctx?.clearRect(0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
-          // Draw the uploaded image on the canvas
-          this.ctx?.drawImage(img, 10, 10, this.canvas.nativeElement.width - 20, this.canvas.nativeElement.height - 10);
+        this.image = new Image();
+        this.image.onload = () => {
+          // Draw the new image (or the same image) on the canvas
+          this.drawImage();
         };
-        img.src = e.target?.result as string; // Set the source of the image
+        this.image.src = e.target?.result as string; // Set the source of the image
       };
       reader.readAsDataURL(file); // Convert the image file to base64 URL
     }
