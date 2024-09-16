@@ -1,7 +1,8 @@
 .quemain {
-  height: 1328px;
+  min-height: 1328px;
   background-color: white;
   margin: 24px;
+  
 
   .quesstatement {
     margin: 24px;
@@ -43,3 +44,9 @@
     grid-area: b;
   }
 }
+.lastxt{
+  margin-left: 24px;
+  // padding-left: 24px;
+  padding-top: 8px;
+  font-size: 12px;
+ }

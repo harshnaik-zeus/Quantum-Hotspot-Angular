@@ -1,0 +1,47 @@
+<div class="big-container">
+    <div class="alt-txt-container">
+      <div class="alt-txt-txt">Image Alternative Text</div>
+      <input type="text" class="alt-txtbox" placeholder="Map">
+    </div>
+  
+    <div class="hotspot-selection">
+      <div class="hot-sec-txt">
+        Set Correct Answer*
+      </div>
+  
+      <div class="gap-give">
+        <label class="label-hotspot">Maximum selections allowed</label>
+        <select class="select-hotspot">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+          <option>6</option>
+          <option>7</option>
+          <option>8</option>
+          <option>9</option>
+          <option>10</option>
+        </select>
+      </div>
+  
+      <div class="empty-div">
+        <div class="empt-div-txt">
+          Correct Answer
+        </div>
+  
+        <div class="add-radio">
+          <!-- Loop to dynamically render checkboxes and buttons for each hotspot -->
+          <div *ngFor="let label of hotspotRadios; let i = index" class="hotspot-row">
+            <input type="checkbox" id="checkbox{{ i }}" class="hotspot-checkbox">
+            <label for="checkbox{{ i }}">
+              <p class="hotspot-radio">
+                Hotspot {{ i + 1 }}
+              </p>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

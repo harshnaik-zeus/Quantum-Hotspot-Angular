@@ -3,15 +3,15 @@ import { SharedService, Selection } from '../../shared.service';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-image-properties',
-  templateUrl: './image-properties.component.html',
-  styleUrls: ['./image-properties.component.scss']
+  selector: 'app-image-below',
+  templateUrl: './image-below.component.html',
+  styleUrls: ['./image-below.component.scss']
 })
-export class ImagePropertiesComponent implements OnInit, OnDestroy {
+export class ImageBelowComponent implements OnInit, OnDestroy {
 
   selections: (Selection | null)[] = [];
   private selectionsSubscription: Subscription | undefined;
-  hotspotLabels: string[] = [];
+  hotspotRadios: string[] = [];
 
   constructor(private sharedService: SharedService) {}
 
@@ -26,19 +26,10 @@ export class ImagePropertiesComponent implements OnInit, OnDestroy {
     this.selectionsSubscription?.unsubscribe();
   }
 
-  clearHotspots(): void {
-    this.sharedService.updateSelections(new Array(10).fill(null));
-    console.log("Selections cleared");
-  }
-
-  deleteHotspot(): void{
-    this.selections.splice(3, 1); 
-    this.sharedService.updateSelections(this.selections);
-  }
-
   private updateHotspotLabels(): void {
-    this.hotspotLabels = this.selections
+    this.hotspotRadios = this.selections
       .map((selection, index) => selection ? `Hotspot ${index + 1}` : '')
       .filter(label => label !== '');  // Only include non-empty labels
   }
-} 
+
+}

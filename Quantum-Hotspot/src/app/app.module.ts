@@ -10,6 +10,7 @@ import { QuestionPropertiesComponent } from './question-properties/question-prop
 import { QuestionMainComponent } from './question-main/question-main.component';
 import { ImageCanvasComponent } from './question-main/image-canvas/image-canvas.component';
 import { ImagePropertiesComponent } from './question-main/image-properties/image-properties.component';
+import { ImageBelowComponent } from './question-main/image-below/image-below.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ImagePropertiesComponent } from './question-main/image-properties/image
     QuestionPropertiesComponent,
     QuestionMainComponent,
     ImageCanvasComponent,
-    ImagePropertiesComponent
+    ImagePropertiesComponent,
+    ImageBelowComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,85 @@
+.big-container {
+  margin: 24px;
+  padding-top: 50px;
+  padding-bottom: 24px;
+
+  .alt-txt-container {
+    .alt-txt-txt {
+      font-size: 16px;
+      padding-bottom: 12px;
+    }
+
+    .alt-txtbox {
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      width: 200px;
+      outline: none;
+      border-bottom: 1px solid #ccc;
+      font-size: 16px;
+      padding-bottom: 4px;
+    }
+  }
+
+  .hotspot-selection {
+    padding-top: 50px;
+
+    .hot-sec-txt {
+      font-size: 12px;
+    }
+
+    .gap-give {
+      padding-top: 16px;
+    }
+
+    .label-hotspot {
+      font-size: 16px;
+      padding-right: 12px;
+    }
+
+    .select-hotspot {
+      border: none;
+      border-bottom: 1px solid #ccc;
+      outline: none;
+      width: 40px;
+      font-weight: 600;
+    }
+
+    .empty-div {
+      height: auto; /* Allow height to adjust dynamically */
+      background-color: #f3fbff;
+      margin-top: 20px;
+      border-radius: 2px;
+      padding: 16px; /* Add padding inside the div */
+      min-height: 231px;
+
+      .empt-div-txt {
+        // padding-left: 24px;
+        padding-top: 16px;
+        font-size: 12px;
+        padding-bottom: 16px;
+
+      }
+
+      .add-radio {
+        .hotspot-row {
+          display: flex;
+          align-items: center;
+          margin-bottom: 20px; /* Space between rows */
+          // height: 200px;
+        }
+
+        .hotspot-checkbox {
+          margin-right: 10px; /* Space between checkbox and label */
+          color: greenS;
+        }
+
+        .hotspot-radio {
+          font-size: 16px;
+          margin: 0; 
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}

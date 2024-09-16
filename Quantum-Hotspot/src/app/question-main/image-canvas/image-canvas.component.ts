@@ -126,6 +126,7 @@ export class ImageCanvasComponent implements OnInit, AfterViewInit, OnDestroy {
         const updatedSelections = [...this.selections];
         updatedSelections[availableIndex] = this.tempSelection;
         this.sharedService.updateSelections(updatedSelections);
+        // this.updateHotspotLabels();
         console.log("Saved Hotspot", availableIndex + 1);
       } else {
         console.log("Cannot Save, MAX 10");
