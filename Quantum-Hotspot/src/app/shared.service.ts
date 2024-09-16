@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 export interface Selection {
   x: number;
@@ -13,27 +14,10 @@ export interface Selection {
   providedIn: 'root'
 })
 export class SharedService {
-  private selections: Selection[] = [];
+  private selectionsSubject = new BehaviorSubject<(Selection | null)[]>(new Array(10).fill(null));
+  selections$ = this.selectionsSubject.asObservable();
 
-  constructor() { }
-
-  // Getter function to retrieve the selections
-  getSelections(): Selection[] {
-    return this.selections;
-  }
-
-  // Setter function to update the selections array
-  setSelections(selections: Selection[]): void {
-    this.selections = selections;
-  }
-
-  // Function to add a single selection to the array
-  addSelection(selection: Selection): void {
-    this.selections.push(selection);
-  }
-
-  // Function to clear the selections
-  clearSelections(): void {
-    this.selections = [];
+  updateSelections(selections: (Selection | null)[]): void {
+    this.selectionsSubject.next(selections);
   }
 }
