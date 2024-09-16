@@ -25,7 +25,7 @@ export class ImageCanvasComponent implements OnInit, AfterViewInit {
   startY = 0;
   currentX = 0;
   currentY = 0;
-  selections: Selection[] = [];
+  selections: (Selection | null)[] = new Array(10).fill(null); // Array of size 10
   tempSelection: Selection | null = null;
 
   image: HTMLImageElement | null = null; // To store the loaded image
@@ -55,6 +55,11 @@ export class ImageCanvasComponent implements OnInit, AfterViewInit {
 
     // Clear temporary selection
     this.tempSelection = null;
+    this.clearCanvas();
+    this.drawImage(); // Redraw the image first
+    this.drawSelections();
+    this.drawTempSelection();
+    // this.drawTempCircle();
   }
 
   onCanvasMouseMove(event: MouseEvent): void {
@@ -79,6 +84,8 @@ export class ImageCanvasComponent implements OnInit, AfterViewInit {
     this.drawImage(); // Redraw the image first
     this.drawSelections();
     this.drawTempSelection();
+    // this.drawTempCircle();
+
   }
 
   onCanvasMouseUp(): void {
@@ -97,13 +104,15 @@ export class ImageCanvasComponent implements OnInit, AfterViewInit {
   // Function to draw all permanent selections
   drawSelections(): void {
     this.selections.forEach(selection => {
-      this.ctx!.fillStyle = selection.fillStyle;
-      this.ctx!.strokeStyle = selection.strokeStyle;
-      this.ctx!.lineWidth = 2;
+      if (selection) {
+        this.ctx!.fillStyle = selection.fillStyle;
+        this.ctx!.strokeStyle = selection.strokeStyle;
+        this.ctx!.lineWidth = 2;
 
-      // Draw the permanent selection on the canvas
-      this.ctx!.fillRect(selection.x, selection.y, selection.width, selection.height);
-      this.ctx!.strokeRect(selection.x, selection.y, selection.width, selection.height);
+        // Draw the permanent selection on the canvas
+        this.ctx!.fillRect(selection.x, selection.y, selection.width, selection.height);
+        this.ctx!.strokeRect(selection.x, selection.y, selection.width, selection.height);
+      }
     });
   }
 
@@ -120,22 +129,59 @@ export class ImageCanvasComponent implements OnInit, AfterViewInit {
     }
   }
 
+  drawTempCircle(): void {
+    if (this.tempSelection) {
+      this.ctx!.fillStyle = this.tempSelection.fillStyle;
+      this.ctx!.strokeStyle = this.tempSelection.strokeStyle;
+      this.ctx!.lineWidth = 2;
+  
+      const radius = Math.sqrt(Math.pow(this.tempSelection.width, 2) + Math.pow(this.tempSelection.height, 2)) / 2;
+      const centerX = this.tempSelection.x + this.tempSelection.width / 2;
+      const centerY = this.tempSelection.y + this.tempSelection.height / 2;
+  
+      this.ctx!.beginPath();
+      this.ctx!.arc(centerX, centerY, radius, 0, Math.PI * 2);
+      this.ctx!.closePath();
+      this.ctx!.fill();
+      this.ctx!.stroke();
+    }
+  }
+  
+
   // Function to save the current temporary selection to the permanent list
   saveSelections(): void {
     if (this.tempSelection) {
-      this.selections.push(this.tempSelection);
-      this.tempSelection = null; // Clear temporary selection after saving
+      // Find the first available null spot or replace the last selection if the array is full
+      const availableIndex = this.selections.findIndex(sel => sel === null);
+      if (availableIndex !== -1) {
+        this.selections[availableIndex] = this.tempSelection; // Insert at the available index
+        console.log("saved Hotspot" , availableIndex + 1);
+      } else {
+       console.log("Cannot Save, MAX 10");
+      }
+      this.tempSelection = null;
     }
     this.clearCanvas();
     this.drawImage(); // Redraw the image first
     this.drawSelections(); // Redraw everything
-    console.log('Saved Selections:', this.selections);
+    // console.log('Saved Selections:', this.selections);
   }
+
+  // Function to delete a selection by index
+  // deleteSelection(index: number): void {
+  //   if (index >= 0 && index < this.selections.length) {
+  //     this.selections[index] = null; // Set the selection at the specified index to null
+  //     this.clearCanvas();
+  //     this.drawImage(); // Redraw the image first
+  //     this.drawSelections(); // Redraw everything
+  //     console.log(`Deleted selection at index ${index}`);
+  //   }
+  // }
 
   // Function to draw the image on the canvas
   drawImage(): void {
     if (this.image) {
-      this.ctx?.drawImage(this.image, 0, 0, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
+      this.ctx?.drawImage(this.image, 10, 10, this.canvas.nativeElement.width - 20, this.canvas.nativeElement.height - 10);
     }
   }
 
@@ -146,7 +192,7 @@ export class ImageCanvasComponent implements OnInit, AfterViewInit {
 
     if (file) {
       // Always reset selections, even if the image is the same
-      this.selections = []; // Clear previous selections
+      this.selections = new Array(10).fill(null); // Clear previous selections and set array size to 10
       this.tempSelection = null; // Clear temporary selections
       this.clearCanvas(); // Clear the canvas
 
