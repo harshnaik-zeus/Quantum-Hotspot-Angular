@@ -14,10 +14,15 @@ export interface Selection {
   providedIn: 'root'
 })
 export class SharedService {
+
+  private selections: Selection[] = [];
   private selectionsSubject = new BehaviorSubject<(Selection | null)[]>(new Array(10).fill(null));
   selections$ = this.selectionsSubject.asObservable();
 
   updateSelections(selections: (Selection | null)[]): void {
     this.selectionsSubject.next(selections);
+  }
+  getSelections(): Selection[] {
+    return this.selections;
   }
 }

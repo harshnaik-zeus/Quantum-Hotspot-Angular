@@ -135,6 +135,32 @@ export class ImageCanvasComponent implements OnInit, AfterViewInit, OnDestroy {
       this.redrawCanvas();
     }
   }
+  DeleteLast(): void {
+    // Find the index of the last non-null selection
+    const lastAssignedIndex = this.selections
+      .slice()
+      .reverse()
+      .findIndex(sel => sel !== null);
+  
+    if (lastAssignedIndex !== -1) {
+      // Adjust index to match the original array
+      const actualIndex = this.selections.length - 1 - lastAssignedIndex;
+  
+      // Create a copy of the selections array and set the selected index to null
+      const updatedSelections = [...this.selections];
+      updatedSelections[actualIndex] = null;
+  
+      // Update the selections in the shared service
+      this.sharedService.updateSelections(updatedSelections);
+  
+      // Redraw the canvas
+      this.redrawCanvas();
+    } else {
+      console.log('No assigned selections to delete.');
+    }
+  }
+  
+  
 
   redrawCanvas(): void {
     if (this.canvas && this.ctx) {

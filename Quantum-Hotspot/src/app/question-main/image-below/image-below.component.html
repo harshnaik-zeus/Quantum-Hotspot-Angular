@@ -31,7 +31,6 @@
         </div>
   
         <div class="add-radio">
-          <!-- Loop to dynamically render checkboxes and buttons for each hotspot -->
           <div *ngFor="let label of hotspotRadios; let i = index" class="hotspot-row">
             <input type="checkbox" id="checkbox{{ i }}" class="hotspot-checkbox">
             <label for="checkbox{{ i }}">
