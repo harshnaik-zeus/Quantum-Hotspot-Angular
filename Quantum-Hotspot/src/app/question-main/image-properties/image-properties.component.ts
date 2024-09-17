@@ -31,10 +31,11 @@ export class ImagePropertiesComponent implements OnInit, OnDestroy {
     console.log("Selections cleared");
   }
 
-  deleteHotspot(): void{
-    this.selections.splice(3, 1); 
+  deleteHotspot(index: number):void{
+    this.selections[index] = null;
     this.sharedService.updateSelections(this.selections);
   }
+
 
   private updateHotspotLabels(): void {
     this.hotspotLabels = this.selections
